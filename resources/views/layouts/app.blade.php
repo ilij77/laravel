@@ -74,7 +74,11 @@
 
         <main class="app-content py-4">
             <div class="container">
-                @yield('content')
+             @section('breadcrumbs')
+                {!!Breadcrumbs::render()!!}
+                @show
+            @include('layouts.partials.flash')
+             @yield('content')
             </div>
         </main>
 <footer>

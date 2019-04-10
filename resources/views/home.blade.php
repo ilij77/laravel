@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('breadcrumbs','')
 @section('content')
 
     <div class="row justify-content-center">
