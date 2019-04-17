@@ -22,12 +22,12 @@ class User extends Authenticatable
      * @var array
      */
 
-    public const STATUS_WAIT='wait';
-    public const STATUS_ACTIV='active';
+    public const STATUS_WAIT ='wait';
+    public const STATUS_ACTIVE ='active';
 
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','status',
     ];
 
     /**
