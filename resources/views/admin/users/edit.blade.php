@@ -22,17 +22,6 @@
                 <span class="invalid-feedback"><strong>{{ $errors->first('email') }}</strong></span>
             @endif
         </div>
-        <div class="form-group">
-            <label for="status" class="col-form-label">Status</label>
-            <select id="status" class="form-control" name="status">
-                @foreach($statuses as $value=>$status)
-                    <option value="{{$value}}"{{$value===old('role',$user->status)?'selected':''}}>
-                        {{$status}}
-                    </option>
-                    @endforeach
-            </select>
-        </div>
-
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Save</button>

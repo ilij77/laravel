@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Entity\User;
+use App\Http\Requests\Admin\Users\CreateRequest;
+use App\Http\Requests\Admin\Users\UpdateRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
@@ -23,17 +27,14 @@ class UsersController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-       $this->validate($request,[
-           'name'=>'required|max:255',
-           'email'=>'required|string|email|max:255|unique:users',
-       ]);
+
        $user=User::create([
            'name'=>$request['name'],
            'email'=>$request['email'],
-           'status'=>User::STATUS_ACTIVE,
-           'password'=>'1234567890',
+           'status'=>User::STATUS_WAIT,
+           'password'=>Hash::make(Str::random()),
        ]);
 
        return redirect()->route('admin.users.show',['id'=>$user->id]);
@@ -48,22 +49,15 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
-        $statuses=[
-           User::STATUS_WAIT=>'Waiting',
-            User::STATUS_ACTIVE=>'Active',
-        ];
-        return view('admin.users.edit',compact('user','statuses'));
+
+        return view('admin.users.edit',compact('user'));
     }
 
 
-    public function update(Request $request, User $user)
+    public function update(UpdateRequest $request, User $user)
     {
-        $data=$this->validate($request,[
-            'name'=>'required|max:255',
-            'email'=>'required|string|email|max:255|unique:users',
-            'status'=>['required','string',Rule::in([User::STATUS_WAIT,User::STATUS_ACTIVE])],
-        ]);
-        $user->update($data);
+
+        $user->update($request->only(['name','email','status']));
         return redirect()->route('admin.users.show',$user);
     }
 
@@ -73,5 +67,9 @@ class UsersController extends Controller
     {
         $user->delete();
         return redirect()->route('admin.users.index');
+    }
+    public function verify(User $user){
+        $user->verify();
+        return redirect()->route('admin.users.show',$user);
     }
 }
