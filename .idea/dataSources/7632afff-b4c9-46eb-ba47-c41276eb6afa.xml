@@ -1008,7 +1008,7 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="246" parent="228" name="verify_code">
+    <column id="246" parent="228" name="verify_token">
       <Position>10</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
@@ -1018,8 +1018,8 @@
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="248" parent="228" name="users_verify_code_unique">
-      <ColNames>verify_code</ColNames>
+    <index id="248" parent="228" name="users_verify_token_unique">
+      <ColNames>verify_token</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
@@ -1032,9 +1032,9 @@
       <ColNames>email</ColNames>
       <UnderlyingIndexName>users_email_unique</UnderlyingIndexName>
     </key>
-    <key id="251" parent="228" name="users_verify_code_unique">
-      <ColNames>verify_code</ColNames>
-      <UnderlyingIndexName>users_verify_code_unique</UnderlyingIndexName>
+    <key id="251" parent="228" name="users_verify_token_unique">
+      <ColNames>verify_token</ColNames>
+      <UnderlyingIndexName>users_verify_token_unique</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>
