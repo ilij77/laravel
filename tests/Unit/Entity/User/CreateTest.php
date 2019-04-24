@@ -22,8 +22,8 @@ class CreateTest extends TestCase
         self::assertEquals('name4', $user->name);
         self::assertEquals('email4', $user->email);
         self::assertNotEmpty($user->password);
-
         self::assertTrue($user->isActive());
+        self::assertFalse($user->isAdmin());
 
     }
 }

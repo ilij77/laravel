@@ -21,10 +21,42 @@ public function __construct(RegisterService $service)
     $this->service = $service;
 }
 
-    public function index()
+    public function index(Request $request)
     {
-        $users=User::orderBy('id','desc')->paginate(20);
-        return view('admin.users.index',compact('users'));
+        $query=User::orderByDesc('id');
+
+        if (!empty($value=$request->get('id'))){
+            $query->where('id',$value);
+        }
+
+        if (!empty($value=$request->get('name'))){
+            $query->where('name','like','%'.$value.'%');
+        }
+
+        if (!empty($value=$request->get('email'))){
+            $query->where('email','like','%'.$value.'%');
+        }
+
+        if (!empty($value=$request->get('status'))){
+            $query->where('status',$value);
+        }
+
+        if (!empty($value=$request->get('role'))){
+            $query->where('role',$value);
+        }
+        $users=$query->paginate(20);
+
+        //$users=User::orderBy('id','desc')->paginate(20);
+
+        $roles=[
+            User::ROLE_USER=>'User',
+            User::ROLE_ADMIN=>'Admin',
+        ];
+        $statuses=[
+            User::STATUS_ACTIVE=>'Active',
+            User::STATUS_WAIT=>'Waiting',
+        ];
+        return view('admin.users.index',compact('users','roles','statuses'));
     }
 
 
@@ -56,15 +88,23 @@ public function __construct(RegisterService $service)
 
     public function edit(User $user)
     {
+        $statuses=[
+            User:: STATUS_WAIT=>'Waiting',
+            User::STATUS_ACTIVE=>'Active ',
+            ];
+        $roles=[
+            User::ROLE_USER=>'User',
+            User::ROLE_ADMIN=>'Admin',
+            ];
 
-        return view('admin.users.edit',compact('user'));
+        return view('admin.users.edit',compact('user','statuses','roles'));
     }
 
 
     public function update(UpdateRequest $request, User $user)
     {
 
-        $user->update($request->only(['name','email','status']));
+        $user->update($request->only(['name','email','status','role']));
         return redirect()->route('admin.users.show',$user);
     }
 

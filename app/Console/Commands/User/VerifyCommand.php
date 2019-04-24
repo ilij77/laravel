@@ -27,6 +27,12 @@ class VerifyCommand extends Command
             $this->error('Undefined user wish email ' .$email);
             return false;
         }
+        try{
+            $this->service->verify($user->id);
+        }catch (\DomainException $e){
+            $this->error($e->getMessage());
+            return false;
+        }
         $this->service->verify($user->id);
         $this->info('Success');
 
