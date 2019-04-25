@@ -10,12 +10,13 @@
             <button class="btn btn-success">Verify</button>
         </form>
     @endif
-
+@can('admin-panel')
     <form method="POST" action="{{ route('admin.users.destroy', $user) }}" class="mr-1">
         @csrf
         @method('DELETE')
         <button class="btn btn-danger">Delete</button>
     </form>
+    @endcan
 </div>
 
 <table class="table table-bordered table-striped">
