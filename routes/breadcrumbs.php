@@ -1,6 +1,8 @@
 <?php
 
 // Home
+use App\Entity\Region;
+
 Breadcrumbs::for('home', function ($trail) {
     $trail->push('Home', route('home'));
 });
@@ -59,3 +61,27 @@ Breadcrumbs::for('admin.users.edit', function ($trail,\App\Entity\User $user) {
     $trail->push('Edit'.$user->name, route('admin.users.edit',$user));
 });
 
+Breadcrumbs::for('admin.regions.index', function ($trail) {
+    $trail->parent('admin.home');
+    $trail->push('Regions', route('admin.regions.index'));
+});
+
+Breadcrumbs::for('admin.regions.create', function ($trail) {
+    $trail->parent('admin.regions.index');
+    $trail->push('Create', route('admin.regions.create'));
+});
+
+Breadcrumbs::for('admin.regions.show', function ($trail, Region $region) {
+    if ($parent=$region->parent){
+        $trail->parent('admin.regions.show',$parent);
+    }else{
+        $trail->parent('admin.regions.index');
+    }
+
+    $trail->push('Регион '.$region->name, route('admin.regions.show',$region));
+});
+
+Breadcrumbs::for('admin.regions.edit', function ($trail, Region $region) {
+    $trail->parent('admin.regions.show',$region);
+    $trail->push('Edit'.$region->name, route('admin.regions.edit',$region));
+});
