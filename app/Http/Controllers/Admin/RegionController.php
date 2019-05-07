@@ -35,8 +35,8 @@ class RegionController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name'=>'required|string|max:255|unique:regions,name,NULL,id,parent_id' .($request['parent'] ?:'NULL'),
-            'slug'=>'required|string|max:255|unique:regions,name,NULL,id,parent_id' .($request['parent'] ?:'NULL'),
+            'name'=>'required|string|max:255' .($request['parent'] ?:'NULL'),
+            'slug'=>'required|string|max:255' .($request['parent'] ?:'NULL'),
             'parent'=>'nullable|exists:regions,id'
         ]);
         $region=Region::create([
@@ -45,7 +45,7 @@ class RegionController extends Controller
             'parent_id'=>$request['parent'],
         ]);
 
-        return redirect()->route('admin.regions.show');
+        return redirect()->route('admin.regions.show',$region);
     }
 
     public function show(Region $region)
@@ -65,8 +65,8 @@ class RegionController extends Controller
     public function update(Request $request, Region $region)
     {
         $this->validate($request,[
-            'name'=>'required|string|max:255|unique:regions,name,NULL,id,parent_id' .($request['parent'] ?:'NULL'),
-            'slug'=>'required|string|max:255|unique:regions,name,NULL,id,parent_id' .($request['parent'] ?:'NULL'),
+            'name'=>'required|string|max:255' .($request['parent'] ?:'NULL'),
+            'slug'=>'required|string|max:255' .($request['parent'] ?:'NULL'),
         ]);
         $region->update([
             'name'=>$request['name'],

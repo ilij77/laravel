@@ -6,12 +6,14 @@
     <a href="{{ route('admin.regions.edit', $region) }}" class="btn btn-primary mr-1">Edit</a>
 
 
+
     <form method="POST" action="{{ route('admin.regions.destroy', $region) }}" class="mr-1">
         @csrf
         @method('DELETE')
         <button class="btn btn-danger">Delete</button>
     </form>
 </div>
+
 
 <table class="table table-bordered table-striped">
     <tbody>
@@ -27,5 +29,6 @@
 
     </tbody>
 </table>
+<p><a href="{{route('admin.regions.create', ['parent' => $region->id])}}" class="btn btn-success">Add SubRegio</a></p>
 @include('admin.regions.list',['regions'=>$regions])
 @endsection
