@@ -41,12 +41,14 @@ class AttributeController extends Controller
             'variants' => array_map('trim', preg_split('#[\r\n]+#', $request['variants'])),
             'sort' => $request['sort'],
         ]);
-
-        return redirect()->route('admin.adverts.categories.attributes.show', [$category, $attribute]);
+//
+        return redirect()->route('admin.adverts.categories.show', [$category, $attribute]);
+        //return redirect()->route('admin.adverts.categories.attributes.show', [$category, $attribute]);
     }
 
     public function show(Category $category, Attribute $attribute)
     {
+
         return view('admin.adverts.categories.attributes.show', compact('category', 'attribute'));
     }
 
