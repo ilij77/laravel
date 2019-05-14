@@ -46,7 +46,7 @@ class RegisterController extends Controller
     {
         $this->service->register($request);
 
-        return redirect()->route('login')->with('success','Check your email and cleck on the link to verify.');
+        return redirect()->route('login')->with('success','Check your email and click on the link to verify.');
     }
 
     public function verify($token)

@@ -130,3 +130,20 @@ Breadcrumbs::for('admin.adverts.categories.attributes.edit', function ($trail,Ca
     $trail->push('Edit', route('admin.adverts.categories.attributes.edit',[$category,$attribute]));
 });
 
+//Cabinet
+
+Breadcrumbs::for('cabinet.home', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Cabinet', route('cabinet.home'));
+});
+
+Breadcrumbs::for('cabinet.profile.home', function ($trail) {
+    $trail->parent('cabinet.home');
+    $trail->push('Profile', route('cabinet.profile.home'));
+});
+
+Breadcrumbs::for('cabinet.profile.edit', function ($trail) {
+    $trail->parent('cabinet.profile.home');
+    $trail->push('Edit', route('cabinet.profile.edit'));
+});
+
