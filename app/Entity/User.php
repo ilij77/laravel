@@ -156,7 +156,7 @@ class User extends Authenticatable
     }
     public function enablePhoneAuth(): void
     {
-        if (!empty($this->phone) && !$this->isPhoneVerified()) {
+        if (empty($this->phone)) {
             throw new \DomainException('Phone number is empty.');
         }
         $this->phone_auth = true;
