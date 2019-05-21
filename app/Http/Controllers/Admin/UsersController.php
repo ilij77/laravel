@@ -48,10 +48,7 @@ public function __construct(RegisterService $service)
 
         //$users=User::orderBy('id','desc')->paginate(20);
 
-        $roles=[
-            User::ROLE_USER=>'User',
-            User::ROLE_ADMIN=>'Admin',
-        ];
+        $roles=User::rolesList();
         $statuses=[
             User::STATUS_ACTIVE=>'Active',
             User::STATUS_WAIT=>'Waiting',
@@ -88,16 +85,10 @@ public function __construct(RegisterService $service)
 
     public function edit(User $user)
     {
-        $statuses=[
-            User:: STATUS_WAIT=>'Waiting',
-            User::STATUS_ACTIVE=>'Active ',
-            ];
-        $roles=[
-            User::ROLE_USER=>'User',
-            User::ROLE_ADMIN=>'Admin',
-            ];
 
-        return view('admin.users.edit',compact('user','statuses','roles'));
+        $roles=User::rolesList();
+
+        return view('admin.users.edit',compact('user','roles'));
     }
 
 

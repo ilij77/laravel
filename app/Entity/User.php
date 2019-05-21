@@ -29,10 +29,11 @@ class User extends Authenticatable
      * @var array
      */
 
-    public const STATUS_WAIT ='wait';
-    public const STATUS_ACTIVE ='active';
+    public const STATUS_WAIT='wait';
+    public const STATUS_ACTIVE='active';
     public const ROLE_ADMIN='admin';
     public const ROLE_USER='user';
+    public const ROLE_MODERATOR='moderator';
 
 
     protected $fillable = [
@@ -98,7 +99,7 @@ class User extends Authenticatable
     }
     public function changeRole($role):void
     {
-        if (!\in_array($role,[self::ROLE_USER,self::ROLE_ADMIN],true)){
+        if (!\in_array($role,self::rolesList(),true)){
             throw new \InvalidArgumentException('Undefined role"' .$role. '"');
         }
         if ($this->role===$role){
@@ -110,6 +111,11 @@ class User extends Authenticatable
     public function isAdmin():bool
     {
         return$this->role===self::ROLE_ADMIN;
+    }
+
+    public function isModerator():bool
+    {
+        return$this->role===self::ROLE_MODERATOR;
     }
 
     public function unverifyPhone():void
@@ -175,6 +181,15 @@ class User extends Authenticatable
     public function hasFilledProfile(): bool
     {
         return !empty($this->name) && !empty($this->last_name) && $this->isPhoneVerified();
+    }
+
+    public static function rolesList():array
+    {
+        return[
+            self::ROLE_USER=>'user',
+            self::ROLE_ADMIN=>'admin',
+            self::ROLE_MODERATOR=>'moderator',
+        ];
     }
 
 }
