@@ -23,6 +23,8 @@ use Carbon\Carbon;
  * @property Carbon $updated_at
  * @property Carbon $published_at
  * @property Carbon $expires_at
+ * @method Builder forUser(User $user);
+ * @method Builder Active
 
  */
 

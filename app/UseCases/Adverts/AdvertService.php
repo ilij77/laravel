@@ -73,7 +73,7 @@ class AdvertService
         $advert->sendToModeration();
     }
 
-    private function getAdvert($id)
+    private function getAdvert($id):Advert
     {
         return Advert::findOrFail($id);
     }

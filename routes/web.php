@@ -46,6 +46,25 @@ Route::group(
 
 });
 
+Route::group([
+    'prefix'=>'adverts',
+    'as'=>'cabinet.adverts.',
+    'namespace'=>'Adverts',
+    'middleware'=>[\App\Http\Middleware\FilledProfile::class],
+],function(){
+    Route::get('/','AdvertController@index')->name('index');
+    Route::get('/create','CreateController@category')->name('create');
+    Route::get('/create/region/{category}/{region?}','CreateController@region')->name('create.region');
+    Route::post('/create/advert/{category}/{region?}','CreateController@store')->name('create.advert.store');
+
+    Route::get('/{advert}/edit','ManageController@edit')->name('edit');
+    Route::put('/{advert}/edit','ManageController@update')->name('update');
+    Route::get('/{advert}/photos','ManageController@photos')->name('photos');
+    Route::post('/{advert}/photos','ManageController@photos');
+    Route::post('/{advert}/send','ManageController@send')->name('send');
+    Route::delete('/{advert}/send','ManageController@destroy')->name('destroy');
+});
+
 Route::group(
     [ 'prefix'=>'admin',
         'as'=>'admin.',

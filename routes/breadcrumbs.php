@@ -158,4 +158,44 @@ Breadcrumbs::for('cabinet.adverts.index', function ($trail) {
     $trail->push('Adverts', route('cabinet.adverts.index'));
 });
 
+// Adverts
+
+Breadcrumbs::for('adverts.inner_region', function ($trail, Region $region=null,Category $category=null) {
+    if ($region && $parent = $region->parent) {
+        $trail->parent('adverts.inner_region', $parent,$category);
+    } else {
+        $trail->parent('home');
+        $trail->push('Adverts', route('adverts.index',$region,$category));
+    }
+    if ($region) {
+        $trail->push($region->name, route('adverts.index',$region,$category));
+    }
+});
+
+Breadcrumbs::for('adverts.inner_category', function ($trail, Region $region=null,Category $category=null) {
+    if ($category && $parent = $category->parent) {
+        $trail->parent('adverts.inner_category', $region,$category);
+    } else {
+        $trail->parent('adverts.inner_region', $region,$category);
+    }
+    if ($category) {
+        $trail->push($category->name, route('adverts.index',$region,$category));
+    }
+});
+
+Breadcrumbs::for('adverts.index', function ($trail, Region $region=null,Category $category=null) {
+    $trail->parent('adverts.inner_category',$region,$category);
+});
+
+Breadcrumbs::for('adverts.show', function ($trail,Advert $advert) {
+    $trail->parent('adverts.index', $advert->region,$advert->category);
+    $trail->push($advert->title, route('adverts.show', $advert));
+});
+
+Breadcrumbs::for('adverts.index.all', function ($trail, Region $region=null,Category $category=null) {
+    $trail->parent('adverts.inner_category',$region,$category);
+
+});
+
+
 

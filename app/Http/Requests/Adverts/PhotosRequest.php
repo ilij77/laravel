@@ -24,7 +24,7 @@ class PhotosRequest extends FormRequest
     public function rules()
     {
         return [
-            'files.*'=>'required|image|mines:jpg,jpeg,png',
+            'files.*'=>'required|image|mimes:jpg,jpeg,png',
         ];
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('cabinet.adverts._nav')
+    {{--@include('cabinet.adverts._nav')--}}
 
     <form method="POST" action="{{ route('cabinet.adverts.create.advert.store', [$category, $region]) }}">
         @csrf
