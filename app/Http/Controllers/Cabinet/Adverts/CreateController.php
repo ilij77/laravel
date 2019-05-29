@@ -17,7 +17,7 @@ class CreateController extends Controller
 
     public function __construct(AdvertService $service)
     {
-        $this->middleware(FilledProfile::class);
+        //$this->middleware(FilledProfile::class);
         $this->service = $service;
     }
 
@@ -54,6 +54,6 @@ class CreateController extends Controller
             return back()->with('error', $e->getMessage());
         }
 
-        return redirect()->route('adverts.show', $advert);
+        return redirect()->route('adverts.show', compact('advert','e'));
     }
 }

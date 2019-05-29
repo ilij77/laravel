@@ -1,6 +1,7 @@
 <?php
 
 // Home
+use App\Entity\Adverts\Advert\Advert;
 use App\Entity\Adverts\Attribute;
 use App\Entity\Adverts\Category;
 use App\Entity\Region;
@@ -157,6 +158,20 @@ Breadcrumbs::for('cabinet.adverts.index', function ($trail) {
     $trail->parent('cabinet.home');
     $trail->push('Adverts', route('cabinet.adverts.index'));
 });
+Breadcrumbs::for('cabinet.adverts.create', function ($trail) {
+    $trail->parent('adverts.index');
+    $trail->push('Create', route('cabinet.adverts.create'));
+});
+
+Breadcrumbs::for('cabinet.adverts.create.region', function ($trail, Category $category,Region $region=null) {
+    $trail->parent('cabinet.adverts.create');
+    $trail->push($category->name, route('cabinet.adverts.create.region',[$category,$region]));
+});
+
+Breadcrumbs::for('cabinet.adverts.create.advert', function ($trail, Category $category,Region $region=null) {
+    $trail->parent('cabinet.adverts.create.region',$category,$region);
+    $trail->push($region ? $region->name : 'All', route('cabinet.adverts.create.advert',[$category,$region]));
+});
 
 // Adverts
 
@@ -187,8 +202,8 @@ Breadcrumbs::for('adverts.index', function ($trail, Region $region=null,Category
     $trail->parent('adverts.inner_category',$region,$category);
 });
 
-Breadcrumbs::for('adverts.show', function ($trail,Advert $advert) {
-    $trail->parent('adverts.index', $advert->region,$advert->category);
+Breadcrumbs::for('adverts.show', function ($trail,Advert $advert, Region $region=null,Category $category=null) {
+    $trail->parent('adverts.index', $region,$category);
     $trail->push($advert->title, route('adverts.show', $advert));
 });
 

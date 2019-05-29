@@ -1,7 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    {{--@include('cabinet.adverts._nav')--}}
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <form method="POST" action="{{ route('cabinet.adverts.create.advert.store', [$category, $region]) }}">
         @csrf
@@ -37,7 +45,7 @@
                     <div class="row">
                         <div class="col-md-11">
                             <input id="address" type="text" class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}"
-                                   name="address" value="{{ old('address', $region->getAddress()) }}" required>
+                                   name="address" value="{{ old('address')}}" required>
                             @if ($errors->has('address'))
                                 <span class="invalid-feedback"><strong>{{ $errors->first('address') }}</strong></span>
                             @endif

@@ -6,7 +6,9 @@ use App\Entity\Adverts\Advert\Advert;
 use App\Entity\Adverts\Category;
 use App\Entity\Region;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+
 
 
 class AdvertController extends Controller
@@ -40,8 +42,8 @@ class AdvertController extends Controller
             abort(403);
         }
 
-
-        return view('adverts.show', compact('advert'));
+        $user = Auth::user();
+        return view('adverts.show',compact('advert','user'));
     }
 
     public function phone(Advert $advert)
