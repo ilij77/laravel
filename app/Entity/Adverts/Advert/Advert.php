@@ -83,6 +83,16 @@ class Advert extends Model
         return $this->hasMany(Photo::class,'advert_id','id');
     }
 
+    public static function statusesList(): array
+    {
+        return [
+            self::STATUS_DRAFT => 'Draft',
+            self::STATUS_MODERATION => 'On Moderation',
+            self::STATUS_ACTIVE => 'Active',
+            self::STATUS_CLOSED => 'Closed',
+        ];
+    }
+
 public function sendToModeration()
 {
     if (!$this->isDraft()){
@@ -125,6 +135,13 @@ public function reject($reason)
             'status'=>self::STATUS_CLOSED,
         ]);
     }
+    public function close(): void
+    {
+        $this->update([
+            'status' => self::STATUS_CLOSED,
+        ]);
+    }
+
 public function scopeForUser(Builder $query,User $user)
 {
     return $query->where('user_id',$user->id);
@@ -132,7 +149,7 @@ public function scopeForUser(Builder $query,User $user)
 
     public function scopeForCategory(Builder $query,Category $category)
     {
-        return $query->where('category_id',array_merge(
+        return $query->whereIn('category_id',array_merge(
             [ $category->id],
             $category->descendants()->pluck('id')->toArray()
         ));
@@ -145,7 +162,7 @@ public function scopeForUser(Builder $query,User $user)
             while($childrenIds= Region::where(['parent_id'=>$childrenIds])->pluck('id')->toArray()){
                 $ids=array_merge($ids,$childrenIds);
             };
-            return $query->where('region_id',$ids);
+            return $query->whereIn('region_id',$ids);
     }
     public function getValue($id)
     {

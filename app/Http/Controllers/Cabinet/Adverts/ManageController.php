@@ -21,14 +21,14 @@ class ManageController extends Controller
         $this->middleware([FilledProfile::class]);
     }
 
-public function edit(Advert $advert){
+public function editForm(Advert $advert){
        return view('adverts.edit.attributes',compact('advert'));
 }
 
 
 
 
-    public function update(EditRequest $request, Advert $advert)
+    public function edit(EditRequest $request, Advert $advert)
     {
         $this->checkAccess($advert);
         try {
@@ -76,6 +76,18 @@ public function edit(Advert $advert){
         $this->checkAccess($advert);
         try {
             $this->service->sendToModeration($advert->id);
+        } catch (\DomainException $e) {
+            return back()->with('error', $e->getMessage());
+        }
+
+        return redirect()->route('adverts.show', $advert);
+    }
+
+    public function close(Advert $advert)
+    {
+        $this->checkAccess($advert);
+        try {
+            $this->service->close($advert->id);
         } catch (\DomainException $e) {
             return back()->with('error', $e->getMessage());
         }

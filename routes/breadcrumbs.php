@@ -213,4 +213,28 @@ Breadcrumbs::for('adverts.index.all', function ($trail, Region $region=null,Cate
 });
 
 
+// Adverts
+
+Breadcrumbs::for('admin.adverts.adverts.index', function ($trail) {
+    $trail->parent('admin.home');
+    $trail->push('Categories', route('admin.adverts.adverts.index'));
+});
+
+Breadcrumbs::for('admin.adverts.adverts.edit', function ($trail, Advert $advert) {
+    $trail->parent('admin.home');
+    $trail->push($advert->title, route('admin.adverts.adverts.edit', $advert));
+});
+
+Breadcrumbs::for('admin.adverts.adverts.reject', function ($trail, Advert $advert) {
+    $trail->parent('admin.home');
+    $trail->push($advert->title, route('admin.adverts.adverts.reject', $advert));
+});
+
+
+
+
+
+
+
+
 

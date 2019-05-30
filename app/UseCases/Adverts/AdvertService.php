@@ -13,6 +13,7 @@ use App\Entity\Region;
 use App\Entity\User;
 use App\Http\Requests\Adverts\AttributesRequest;
 use App\Http\Requests\Adverts\CreateRequest;
+use App\Http\Requests\Adverts\EditRequest;
 use App\Http\Requests\Adverts\PhotosRequest;
 use App\Http\Requests\Adverts\RejectRequest;
 use Carbon\Carbon;
@@ -67,6 +68,17 @@ class AdvertService
             }
         });
     }
+
+    public function edit($id, EditRequest $request): void
+    {
+        $advert = $this->getAdvert($id);
+        $advert->update($request->only([
+            'title',
+            'content',
+            'price',
+            'address',
+        ]));
+    }
     public function  sendToModeration($id)
     {
         $advert=$this->getAdvert($id);
@@ -93,7 +105,7 @@ public function editAttributes($id,AttributesRequest $request)
 {
     $advert=$this->getAdvert($id);
     DB::transaction(function ()use ($request,$advert){
-        foreach ($advert-values as $value){
+        foreach ($advert->values as $value){
          $advert->values()->delete();
             }
        foreach ($advert->category->allAttributes() as $attribute){
@@ -114,6 +126,11 @@ public function editAttributes($id,AttributesRequest $request)
     public function expire(Advert $advert)
     {
         $advert->expire();
+    }
+    public function close($id): void
+    {
+        $advert = $this->getAdvert($id);
+        $advert->close();
     }
 
 
