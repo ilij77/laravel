@@ -66,6 +66,7 @@ class AdvertService
                     'file'=>$file->store('adverts')
                 ]);
             }
+            $advert->update();
         });
     }
 
@@ -117,6 +118,7 @@ public function editAttributes($id,AttributesRequest $request)
                 ]);
                 }
             }
+        $advert->update();
       });
     }
     public function  remove($id){

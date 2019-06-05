@@ -98,9 +98,9 @@ public function sendToModeration()
     if (!$this->isDraft()){
         throw new \DomainException('Advert is not draft.');
     }
-    if (!$this->photos()->count()){
-        throw new \DomainException('Fill attributes and upload photos.');
-    }
+//    if (!$this->photos()->count()){
+//        throw new \DomainException('Fill attributes and upload photos.');
+//    }
 
     $this->update([
         'status'=>self::STATUS_MODERATION,

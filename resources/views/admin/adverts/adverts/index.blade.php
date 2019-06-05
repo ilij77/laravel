@@ -90,7 +90,7 @@
                 <td>
                     @if ($advert->isDraft())
                         <span class="badge badge-secondary">Draft</span>
-                    @elseif ($advert->isOnModeration())
+                    @elseif ($advert->isModeration())
                         <span class="badge badge-primary">Moderation</span>
                     @elseif ($advert->isActive())
                         <span class="badge badge-primary">Active</span>

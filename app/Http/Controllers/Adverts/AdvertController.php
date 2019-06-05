@@ -6,6 +6,7 @@ use App\Entity\Adverts\Advert\Advert;
 use App\Entity\Adverts\Category;
 use App\Entity\Region;
 use App\Http\Controllers\Controller;
+use App\Http\Router\AdvertsPath;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -15,8 +16,10 @@ class AdvertController extends Controller
 {
 
 
-    public function index(Region $region=null,Category $category=null)
+    public function index(AdvertsPath $path)
     {
+        $region = $path->region;
+        $category = $path->category;
         $query=Advert::active()->with(['category','region'])->orderBy('published_at');
         if ($category){
             $query->forCategory($category);

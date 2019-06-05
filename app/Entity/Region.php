@@ -21,6 +21,11 @@ class Region extends Model
         return $this->hasMany(static::class,'parent_id','id');
     }
 
+    public function getPath(): string
+    {
+        return ($this->parent ? $this->parent->getPath() . '/' : '') . $this->slug;
+    }
+
     public function getAddress():string
     {
         return($this->parent ? $this->parent->getAddress(). ',' :'')  .$this->name;

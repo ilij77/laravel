@@ -29,6 +29,8 @@ Route::group([
     Route::post('/show/{advert}/phone','AdvertController@phone')->name('phone');
     Route::get('/all/{category?}','AdvertController@index')->name('index.all');
     Route::get('/{region?}/{category?}','AdvertController@index')->name('index');
+
+    Route::get('/{adverts_path?}', 'AdvertController@index')->name('index')->where('adverts_path', '.+');
 });
 
 
@@ -70,6 +72,7 @@ Route::group(
         Route::get('/{advert}/photos','ManageController@photos')->name('photos');
         Route::post('/{advert}/photos','ManageController@photos');
         Route::post('/{advert}/send','ManageController@send')->name('send');
+        Route::post('/{advert}/close', 'ManageController@close')->name('close');
         Route::delete('/{advert}/send','ManageController@destroy')->name('destroy');
     });
 

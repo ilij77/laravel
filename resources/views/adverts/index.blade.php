@@ -19,7 +19,7 @@
                             <ul class="list-unstyled">
                                 @foreach ($chunk as $current)
                                     <li>
-                                        <a href="{{ route('adverts.index', [$region, $current])}}">{{ $current->name }}</a>
+                                        <a href="{{ route('adverts.index', adverts_path($region, $current)) }}">{{ $current->name }}</a>
                                         ({{ $categoriesCounts[$current->id] ?? 0 }})
                                     </li>
                                 @endforeach
@@ -47,7 +47,7 @@
                             <ul class="list-unstyled">
                                 @foreach ($chunk as $current)
                                     <li>
-                                        <a href="{{ route('adverts.index',[$current, $category]) }}">{{ $current->name }}</a>
+                                        <a href="{{ route('adverts.index',adverts_path($current, $category)) }}">{{ $current->name }}</a>
                                         ({{ $regionsCounts[$current->id] ?? 0 }})
                                     </li>
                                 @endforeach
