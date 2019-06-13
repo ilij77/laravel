@@ -19,6 +19,7 @@ public function __construct(RegisterService $service)
 {
 
     $this->service = $service;
+    $this->middleware('can:manage-users');
 }
 
     public function index(Request $request)

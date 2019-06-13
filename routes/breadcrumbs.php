@@ -232,6 +232,13 @@ Breadcrumbs::for('admin.adverts.adverts.reject', function ($trail, Advert $adver
     $trail->push($advert->title, route('admin.adverts.adverts.reject', $advert));
 });
 
+// Favorites
+
+Breadcrumbs::register('cabinet.favorites.index', function ($trail) {
+    $trail->parent('cabinet.home');
+    $trail->push('Adverts', route('cabinet.favorites.index'));
+});
+
 
 
 

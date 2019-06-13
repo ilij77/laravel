@@ -120,6 +120,19 @@
                 <span class="btn btn-success mr-1"><span class="fa fa-envelope"></span> Send Message</span>
                 <span class="btn btn-primary phone-button mr-1" data-source="{{ route('adverts.phone', $advert) }}"><span class="fa fa-phone"></span> <span class="number">Show Phone Number</span></span>
 
+                @if ($user && $user->hasInFavorites($advert->id))
+                    <form method="POST" action="{{ route('adverts.favorites', $advert) }}" class="mr-1">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-secondary"><span class="fa fa-star"></span> Remove from Favorites</button>
+                    </form>
+                @else
+                    <form method="POST" action="{{ route('adverts.favorites', $advert) }}" class="mr-1">
+                        @csrf
+                        <button class="btn btn-danger"><span class="fa fa-star"></span> Add to Favorites</button>
+                    </form>
+                @endif
+
             </div>
 
             <script src="//api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
