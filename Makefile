@@ -38,7 +38,7 @@ horizon-terminate:
 	docker-compose exec php-cli php artisan horizon:terminate
 
 memory:
-	sudo sysctl -w vm.max_map_count=262144
+	sudo sysctl -w vm.max_map_count=462144
 
 perm:
 	sudo chgrp -R www-data storage bootstrap/cache
