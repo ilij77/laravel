@@ -25,7 +25,8 @@ class CreateRequest extends FormRequest
             'limit' => 'required|integer',
             'url' => 'required|url',
             'format' => ['required', 'string', Rule::in(Banner::formatsList())],
-            'file' => 'required|image|mimes:jpg,jpeg,png|dimensions:width=' . $width . ',height=' . $height,
+            'file' => 'required|image|mimes:jpg,jpeg,png',
+            //'file' => 'required|image|mimes:jpg,jpeg,png|dimensions:width=' . $width . ',height=' . $height,
         ];
     }
 }

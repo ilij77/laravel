@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Entity\Banner\Banner;
 use App\Entity\User;
 use App\Entity\Adverts\Advert\Advert;
 use Illuminate\Support\Facades\Gate;

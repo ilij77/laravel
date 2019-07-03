@@ -4,6 +4,7 @@
 use App\Entity\Adverts\Advert\Advert;
 use App\Entity\Adverts\Attribute;
 use App\Entity\Adverts\Category;
+use App\Entity\Banner\Banner;
 use App\Entity\Region;
 use App\Http\Router\AdvertsPath;
 
@@ -174,6 +175,45 @@ Breadcrumbs::for('cabinet.adverts.create.advert', function ($trail, Category $ca
     $trail->push($region ? $region->name : 'All', route('cabinet.adverts.create.advert',[$category,$region]));
 });
 
+
+// Cabinet Banners
+
+Breadcrumbs::for('cabinet.banners.index', function ($trail) {
+    $trail->parent('cabinet.home');
+    $trail->push('Banners', route('cabinet.banners.index'));
+});
+
+Breadcrumbs::for('cabinet.banners.show', function ($trail, Banner $banner) {
+    $trail->parent('cabinet.banners.index');
+    $trail->push($banner->name, route('cabinet.banners.show', $banner));
+});
+
+Breadcrumbs::for('cabinet.banners.edit', function ($trail, Banner $banner) {
+    $trail->parent('cabinet.banners.show', $banner);
+    $trail->push('Edit', route('cabinet.banners.edit', $banner));
+});
+
+Breadcrumbs::for('cabinet.banners.file', function ($trail, Banner $banner) {
+    $trail->parent('cabinet.banners.show', $banner);
+    $trail->push('File', route('cabinet.banners.file', $banner));
+});
+
+Breadcrumbs::for('cabinet.banners.create', function ($trail) {
+    $trail->parent('cabinet.banners.index');
+    $trail->push('Create', route('cabinet.banners.create'));
+});
+
+Breadcrumbs::for('cabinet.banners.create.region', function ($trail, Category $category, Region $region = null) {
+    $trail->parent('cabinet.banners.create');
+    $trail->push($category->name, route('cabinet.banners.create.region', [$category, $region]));
+});
+
+Breadcrumbs::for('cabinet.banners.create.banner', function ($trail, Category $category, Region $region = null) {
+    $trail->parent('cabinet.banners.create.region', $category, $region);
+    $trail->push($region ? $region->name : 'All', route('cabinet.banners.create.banner', [$category, $region]));
+});
+
+
 // Adverts
 
 Breadcrumbs::for('adverts.inner_region', function ($trail,  AdvertsPath $path) {
@@ -238,6 +278,29 @@ Breadcrumbs::register('cabinet.favorites.index', function ($trail) {
     $trail->parent('cabinet.home');
     $trail->push('Adverts', route('cabinet.favorites.index'));
 });
+
+// Banners
+
+Breadcrumbs::for('admin.banners.index', function ($trail) {
+    $trail->parent('admin.home');
+    $trail->push('Banners', route('admin.banners.index'));
+});
+
+Breadcrumbs::for('admin.banners.show', function ($trail, Banner $banner) {
+    $trail->parent('admin.banners.index');
+    $trail->push($banner->name, route('admin.banners.show', $banner));
+});
+
+Breadcrumbs::for('admin.banners.edit', function ($trail, Banner $banner) {
+    $trail->parent('admin.banners.show', $banner);
+    $trail->push('Edit', route('admin.banners.edit', $banner));
+});
+
+Breadcrumbs::for('admin.banners.reject', function ($trail, Banner $banner) {
+    $trail->parent('admin.banners.show', $banner);
+    $trail->push('Reject', route('admin.banners.reject', $banner));
+});
+
 
 
 
