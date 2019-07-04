@@ -26,8 +26,8 @@ class BannerService
     }
 
 
-//    public function getRandomForView(?int $categoryId, ?int $regionId, $format): ?Banner
-//    {
+    public function getRandomForView(?int $categoryId, ?int $regionId, $format): ?Banner
+    {
 //        $response = $this->client->search([
 //            'index' => 'banners',
 //            'type' => 'banner',
@@ -57,20 +57,21 @@ class BannerService
 //        if (!$ids = array_column($response['hits']['hits'], '_id')) {
 //            return null;
 //        }
-//
-//        $banner = Banner::active()
-//            ->with(['category', 'region'])
-//            ->whereIn('id', $ids)
-//            ->orderByRaw('FIELD(id,' . implode(',', $ids) . ')')
-//            ->first();
-//
-//        if (!$banner) {
-//            return null;
-//        }
-//
-//        $banner->view();
-//        return $banner;
-//    }
+
+        $banner = Banner::active()
+            ->where('region_id', $regionId ?: null)
+            //->where('category_id', $categoryId ?: null)
+
+            ->orderByRaw('RAND()')->take(1)
+            ->first();
+
+        if (!$banner) {
+            return null;
+        }
+
+        $banner->view();
+        return $banner;
+    }
 
     public function create(User $user, Category $category, ?Region $region, CreateRequest $request): Banner
     {

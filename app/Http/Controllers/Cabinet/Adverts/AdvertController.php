@@ -25,7 +25,9 @@ class AdvertController extends Controller
     public function index()
     {
         $adverts=Advert::forUser(Auth::user())->orderByDesc('id')->paginate(20);
+
         return view('cabinet.adverts.index',compact('adverts'));
+
     }
 
     public function create()
@@ -34,8 +36,9 @@ class AdvertController extends Controller
     }
 
     public function edit()
+
     {
-        return view('cabinet.adverts.edit');
+            return view('cabinet.adverts.edit');
     }
 
 }

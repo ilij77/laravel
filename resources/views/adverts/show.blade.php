@@ -202,7 +202,7 @@
         </div>
         <div class="col-md-3">
             <div style="height: 400px; background: #f6f6f6; border: 1px solid #ddd; margin-bottom: 20px"></div>
-            <div style="height: 400px; background: #f6f6f6; border: 1px solid #ddd; margin-bottom: 20px"></div>
+
         </div>
     </div>
 @endsection
