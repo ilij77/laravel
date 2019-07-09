@@ -18,6 +18,8 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 Route::get('/verify/{token}','Auth\RegisterController@verify')->name('register.verify');
+Route::get('/login/{network}', 'Auth\NetworkController@redirect')->name('login.network');
+Route::get('/login/{network}/callback', 'Auth\NetworkController@callback');
 Route::get('/cabinet','Cabinet\HomeController@index')->name('cabinet');
 Route::get('/banner/get', 'BannerController@get')->name('banner.get');
 Route::get('/banner/{banner}/click', 'BannerController@click')->name('banner.click');

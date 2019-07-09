@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Entity\Banner\Banner;
-use App\Entity\User;
+use App\Entity\User\User;
 use App\Entity\Adverts\Advert\Advert;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;

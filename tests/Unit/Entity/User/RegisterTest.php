@@ -9,7 +9,7 @@
 namespace Tests\Unit\Entity\User;
 
 
-use App\Entity\User;
+use App\Entity\User\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;

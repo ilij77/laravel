@@ -11,7 +11,7 @@ namespace App\UseCases\Auth;
 
 use App\Http\Requests\Auth\RegisterReguest;
 use App\Mail\Auth\VerifyMail;
-use App\Entity\User;
+use App\Entity\User\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Mail\Mailer;

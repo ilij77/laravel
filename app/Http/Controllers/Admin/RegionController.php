@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Entity\Region;
-use App\Entity\User;
+use App\Entity\User\User;
 use App\Http\Requests\Admin\CreateRequest;
 use App\Http\Requests\Admin\UpdateRequest;
 use Illuminate\Http\Request;
