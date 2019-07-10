@@ -9,7 +9,7 @@
 namespace App\UseCases\Auth;
 
 
-use App\Http\Requests\Auth\RegisterReguest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Mail\Auth\VerifyMail;
 use App\Entity\User\User;
 use Illuminate\Auth\Events\Registered;
@@ -29,7 +29,7 @@ class RegisterService
         $this->dispatcher = $dispatcher;
     }
 
-    public function register(RegisterReguest $request){
+    public function register(RegisterRequest $request){
         $user=User::register(
             $request['name'],
             $request['email'],

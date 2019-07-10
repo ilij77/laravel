@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Requests\Auth\RegisterReguest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Mail\Auth\VerifyMail;
 use App\Entity\User\User;
 use App\Http\Controllers\Controller;
@@ -42,7 +42,7 @@ class RegisterController extends Controller
     }
 
 
-    public function register(RegisterReguest $request)
+    public function register(RegisterRequest $request)
     {
         $this->service->register($request);
 
