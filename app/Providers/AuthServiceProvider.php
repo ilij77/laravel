@@ -7,6 +7,7 @@ use App\Entity\User\User;
 use App\Entity\Adverts\Advert\Advert;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -19,14 +20,22 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
-    /**
-     * Register any authentication / authorization services.
-     *
-     * @return void
-     */
+
     public function boot()
     {
         $this->registerPolicies();
+        $this->registerPermissions();
+        Passport::routes();
+
+
+
+
+
+
+    }
+    private function registerPermissions()
+    {
+
         Gate::define('admin-panel', function (User $user){
             return $user->isAdmin();
         });
@@ -60,9 +69,6 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('manage-banners', function (User $user) {
             return $user->isAdmin() || $user->isModerator();
         });
-
-
-
 
     }
 }
